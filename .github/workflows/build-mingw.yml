@@ -14,7 +14,7 @@ jobs:
       libraryName: catkin
       cmakeInstallationPath: catkin-installation
       tagName: 0.8.10
-      targetZip: catkin-${{ github.ref_name }}.zip
+      mingwTargetZip: catkin-${{ github.ref_name }}-mingw64-x86_64-posix-seh-rev0-8.1.0.zip
     steps:
       - name: git clone
         shell: cmd
@@ -78,11 +78,11 @@ jobs:
         with:
           type: 'zip'
           directory: "catkin/cmake-build/${{ env.cmakeInstallationPath }}"
-          filename: "${{ env.targetZip }}"
+          filename: "${{ env.mingwTargetZip }}"
           
       - name: Release prebuilt
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "catkin/cmake-build/${{ env.cmakeInstallationPath }}/${{ env.targetZip }}"
+          artifacts: "catkin/cmake-build/${{ env.cmakeInstallationPath }}/${{ env.mingwTargetZip }}"
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
