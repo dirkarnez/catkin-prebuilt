@@ -42,6 +42,14 @@ jobs:
         shell: cmd
         run: cd /d ${{ github.workspace }} && curl https://github.com/git-for-windows/git/releases/download/v2.38.1.windows.1/PortableGit-2.38.1-64-bit.7z.exe -L --output PortableGit-2.38.1-64-bit.7z.exe && dir && 7z.exe x PortableGit-2.38.1-64-bit.7z.exe -o"PortableGit-2.38.1-64-bit"
         
+      - shell: cmd
+        run: |
+          curl https://files.pythonhosted.org/packages/3b/95/88ed47cb7da88569a78b7d6fb9420298df7e99997810c844a924d96d3c08/empy-3.3.4.tar.gz -L --output empy-3.3.4.tar.gz &&^
+          tar -xvf empy-3.3.4.tar.gz &&^
+          rename empy-3.3.4 empy &&^
+          cd empy &&^
+          dir
+          
       - name: set PATH, check mingw version, cmake generate, build and install
         shell: cmd
         run: |
@@ -53,12 +61,14 @@ jobs:
             ${{ github.workspace }}\python-3.8.10-amd64-portable;^
             ${{ github.workspace }}\python-3.8.10-amd64-portable\Scripts;
             gcc --version &&^
+            set CD_LINUX=%CD:\=/%
             cd catkin &&^
             python -m pip install --upgrade pip &&^
             python -m pip install python3-empy &&^
             cmake.exe -G "MinGW Makefiles" ^
             -DCMAKE_BUILD_TYPE=Release ^
             -DCATKIN_ENABLE_TESTING=OFF ^
+            -DEMPY_SCRIPT="%CD_LINUX%/empy/em.py" ^
             -DCMAKE_INSTALL_PREFIX="cmake-build/${{ env.cmakeInstallationPath }}" -B./cmake-build &&^
             cd cmake-build && cmake --build . && cmake --install . 
             
