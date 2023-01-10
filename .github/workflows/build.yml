@@ -43,7 +43,6 @@ jobs:
             ${{ github.workspace }}\cmake-3.24.0-windows-x86_64\bin;^
             ${{ github.workspace }}\python-3.8.10-amd64-portable;^
             ${{ github.workspace }}\python-3.8.10-amd64-portable\Scripts;
-            gcc --version &&^
             cd catkin &&^
             cmake.exe -G "MinGW Makefiles" ^
             -DCMAKE_BUILD_TYPE=Release ^
