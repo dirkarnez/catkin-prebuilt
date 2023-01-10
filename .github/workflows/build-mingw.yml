@@ -78,11 +78,11 @@ jobs:
         with:
           type: 'zip'
           directory: "catkin/cmake-build/${{ env.cmakeInstallationPath }}"
-          filename: "${{ env.mingwTargetZip }}"
+          filename: "${{ env.targetZip }}"
           
       - name: Release prebuilt
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "catkin/cmake-build/${{ env.cmakeInstallationPath }}/${{ env.mingwTargetZip }}"
+          artifacts: "catkin/cmake-build/${{ env.cmakeInstallationPath }}/${{ env.targetZip }}"
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
